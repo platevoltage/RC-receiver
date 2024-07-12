@@ -16,8 +16,8 @@ int drivePin = 18;
 
 // Structure to hold incoming data
 typedef struct struct_message {
-    char text[32];
-    int value;
+    int steering;
+    int drive;
 } struct_message;
 
 // MAC address of the sender (transmitter)
@@ -37,14 +37,14 @@ void OnDataRecv(const uint8_t *mac_addr, const uint8_t *data, int len) {
     struct_message *msg = (struct_message *)data;
 
     // Print received data
-    Serial.print("Text: ");
-    Serial.println(msg->text);
+    // Serial.print("Text: ");
+    // Serial.println(msg->text);
     Serial.print("Value: ");
-    Serial.println(msg->value);
+    Serial.println(msg->steering);
     Serial.println();
     // leds[0] = msg->value;
-    steering.write(msg->value);
-    drive.write(msg->value);
+    steering.write(msg->steering);
+    drive.write(msg->drive);
     // FastLED.show();
 }
 
